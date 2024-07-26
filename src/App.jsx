@@ -1,33 +1,61 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Home } from './Components/Home/Home'
+import { Content } from './Components/Content/Content'
+import Abou, { AboutA } from './Components/About/About'
 
 function App() {
-  const [count, setCount] = useState(0)
+  let [age, setAge] = useState(22);
+  let [product, setProduct] = useState({id: 1, price: 30, name: "Toshiba"});
+  let [products, setProducts] = useState([
+    {id: 1, price: 10, name: "Toshiba"},
+    {id: 2, price: 20, name: "Sony"},
+    {id: 3, price: 30, name: "LG"},
+  ]);
+  let [userName, setUserName] = useState("Nour");
+  
+  const changeYears = () => {
+    setAge(25)
+  }
+
+  const changeProductName = () => {
+    setProduct({
+      id: 1, //Can Delete
+      price: 30, //Can Delete
+      name: "Sony"
+    })
+  }
+
+  function Delete(id) {
+    let newProducts = structuredClone(products)
+    newProducts = newProducts.filter(ele => ele.id != id)
+    setProducts(newProducts)
+  }
+
+  function Update(index) {
+    let newProducts = structuredClone(products);
+    newProducts[index].price++;
+    setProducts(newProducts);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1 className='bg-red-700'>{age} Year</h1>
+      <button onClick={changeYears}>Change Years</button> {/*Or .. */}
+      <button onClick={() => setAge(30)}>Change Years</button>
+
+      <h2 className='bg-red-300'>{product.name}</h2>
+      <button onClick={changeProductName}>Change Product Name</button> {/*Or .. */}
+      <button onClick={() => setProduct({name: "LG"})}>Change Product Name</button> 
+      <Home />
+      <Content userName={userName} />
+      <Abou products={products} />
+
+      {/* <AboutA products={products[0]} />
+      <AboutA products={products[1]} />
+      <AboutA products={products[2]} /> */}
+      {/* OR */}
+      {products.map((products, index) => <AboutA products={products} Delete={Delete} Update={Update} index={index} /> )}
     </>
   )
 }

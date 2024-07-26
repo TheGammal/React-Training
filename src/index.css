@@ -70,3 +70,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Added */
+.about {
+  background-color: #535bf2;
+}
+
+.content {
+  background-color: #0c8a0c;
+}
+
+.home {
+  background-color: antiquewhite;
+}
