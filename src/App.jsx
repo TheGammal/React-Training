@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1 className='bg-red-700'>{age} Year</h1>
+      <h1 className='bg-red-900'>{age} Year</h1>
       <button onClick={changeYears}>Change Years</button> {/*Or .. */}
       <button onClick={() => setAge(30)}>Change Years</button>
 
